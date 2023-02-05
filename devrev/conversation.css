@@ -1,0 +1,33 @@
+.conversation-box {
+  position: absolute;
+  z-index: 999;
+  background-color: #fff;
+  right: 0;
+  width: 400px;
+  height: 100%;
+  border: 1px solid #ddd;
+  box-shadow: -10px 0px 10px 1px #aaaaaa;
+}
+
+.ticket-box {
+  position: absolute;
+  z-index: 999;
+  background-color: #fff;
+  right: 400px;
+  width: 400px;
+  height: 100%;
+  border: 1px solid #ddd;
+  box-shadow: -5px 10px 10px 1px #eee;
+}
+
+.conv-box__header {
+  background-color: #fff3eb;
+  color: #a85821;
+  width: fit-content;
+}
+
+.ticket-box__header {
+  background-color: #fffbe5;
+  color: #9b8206;
+  width: fit-content;
+}

@@ -26,7 +26,7 @@
   justify-content: space-between;
 }
 
-.main-page__filters > .main-page__filter-fields {
+.main-page__filter-fields {
   display: flex;
   align-items: center;
   flex-wrap: wrap;

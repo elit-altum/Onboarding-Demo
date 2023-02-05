@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DevRev</title>
 
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
     <link rel="stylesheet" href="../css/font-awesome/css/fontawesome.min.css" />
     <link rel="stylesheet" href="../css/font-awesome/css/solid.min.css" />
     <link rel="stylesheet" href="../css/font-awesome/css/regular.min.css" />
@@ -12,7 +17,8 @@
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="nav.css" />
     <link rel="stylesheet" href="page.css" />
-
+    <link rel="stylesheet" href="conversation.css" />
+    <link rel="stylesheet" href="../css/custom.css" />
   </head>
   <body>
     <!-- SIDE NAV SECTION ------------ -->
@@ -91,7 +97,7 @@
 
     <div class="main-page">
       <div class="main-page__head">
-        Support / 
+        Support /
         <p>Inbox</p>
       </div>
 
@@ -130,18 +136,243 @@
         <div class="conv-table__row">
           <div class="members">Customer Name</div>
           <div class="rev_org">Google</div>
-          <div class="last_message">I can share the ticket with you! Please hold for sometime</div>
+          <div class="last_message">
+            I can share the ticket with you! Please hold for sometime
+          </div>
           <div class="stage">
-            <i style="font-size: 12px; color: #aaa" class="fa-solid fa-clock-rotate-left"></i>
+            <i
+              style="font-size: 12px; color: #aaa"
+              class="fa-solid fa-clock-rotate-left"
+            ></i>
             New
           </div>
-          <div class="tags"> - </div>
+          <div class="tags">-</div>
           <div class="last_updated">Just Now</div>
         </div>
       </div>
-
     </div>
 
     <!-- MAIN PAGE CONTENT END -------------- -->
+
+    <!-- CONVERSATION BOX MODAL ------------- -->
+    <div class="conversation-box flex flex-col">
+      <div class="conv-box__header m-5 text-xs p-1 px-2 rounded-lg font-medium">
+        <p><i class="fa-regular fa-comments"></i> CONV-1</p>
+      </div>
+
+      <div class="conv-box__meta ml-5 text-xs flex .items-center">
+        <div
+          class="conv-box__meta-customer bg-gray-300 p-1 px-2 rounded-full mr-2 cursor-pointer"
+        >
+          your.customer
+        </div>
+        <p class="pt-1">from</p>
+        <div
+          class="conv-box__meta-revOrg bg-gray-300 p-1 px-2 rounded-full ml-2 cursor-pointer"
+        >
+          Manan Demo DevOrg
+        </div>
+      </div>
+
+      <div class="conv-box__fields my-5 ml-5 flex">
+        <div class="main-page__filter-field flex items-center">
+          Stage
+          <div class="ml-2 text-black">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            New
+          </div>
+        </div>
+        <div class="main-page__filter-field">Owner</div>
+        <div class="main-page__filter-field flex items-center">
+          Members
+          <p class="ml-2 text-black">2</p>
+        </div>
+        <div class="main-page__filter-field">Tags</div>
+      </div>
+      <hr />
+
+      <div class="conv-box__tickets my-5 mx-5">
+        <div class="conv-box__tickets-head flex justify-between items-center">
+          <p class="text-xs font-medium bg-gray-300 py-1 px-2 rounded-full">
+            Tickets
+          </p>
+          <p class="text-gray-500 text-xs cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Link Tickets
+          </p>
+        </div>
+        <div
+          class="mt-5 conv-box__tickets-box h-20 rounded-lg flex items-center justify-center"
+          style="border: 1px solid #ccc"
+        >
+          <p class="text-gray-500 text-xs">No Linked Tickets</p>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="conv-box__comments mt-3 overflow-y-scroll invisible-scroll">
+        <div class="conv-box__comment mx-3 mt-3 flex">
+          <div
+            class="pfp w-8 h-8 bg-gray-500 flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"
+          >
+            YY
+          </div>
+          <div class="conv-box__comments-data w-full">
+            <div class="conv-box__comments-head flex justify-between">
+              <p class="text-sm font-medium">your.customer</p>
+              <p class="text-gray-500" style="font-size: 10px">6:21 PM</p>
+            </div>
+            <p class="text-sm">Hey! Just Testing</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="plug_box-textBox absolute bottom-0 z-40 pb-3 w-full">
+        <hr />
+        <div class="plug_box-editor">
+          <div class="editor-input" id="editor-input-text"></div>
+          <div class="editor-row">
+            <div class="edit-row__icons">
+              <i class="fa-regular fa-face-smile-wink"></i>
+              <i class="fa-solid fa-paperclip"></i>
+              <i class="fa-solid fa-bold"></i>
+              <i class="fa-solid fa-italic"></i>
+              <i class="fa-solid fa-strikethrough"></i>
+              <i class="fa-solid fa-link"></i>
+              <i class="fa-solid fa-code"></i>
+              <i class="fa-solid fa-list-ul"></i>
+              <i class="fa-solid fa-list-ol"></i>
+            </div>
+            <button class="edit-row__submit" id="editor-input-submit">
+              <i class="fa-regular fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- CONVERSATION BOX MODAL ------------- -->
+
+    <!-- CONVERSATION BOX MODAL ------------- -->
+    <div class="ticket-box flex flex-col">
+      <div
+        class="ticket-box__header m-5 text-xs p-1 px-2 rounded-lg font-medium"
+      >
+        <p><i class="fa-regular fa-pen-to-square"></i> New Ticket</p>
+      </div>
+
+      <div class="ml-5 pb-4 text-sm text-gray-600 cursor-pointer">
+        Add Title
+      </div>
+      <hr />
+
+      <div class="ml-5 mt-5 pb-4 text-sm text-gray-600 cursor-pointer">
+        Add Description
+      </div>
+      <div class="ml-5 text-sm pb-4 text-gray-700 cursor-pointer">
+        <i class="fa-solid fa-paperclip"></i>
+      </div>
+      <hr />
+
+      <div class="ml-5 mt-5 text-sm text-gray-600" style="font-size: 10px">
+        Which part is this work item about?
+      </div>
+      <div class="ml-5 pb-4 mt-3 text-sm text-gray-600 cursor-pointer">
+        Your Product / Capability / <i class="fa-solid fa-shapes"></i> Feature C
+      </div>
+
+      <hr />
+
+      <div class="ml-5 mt-5 text-sm text-gray-600" style="font-size: 10px">
+        Attributes
+      </div>
+      <div class="attribute ml-5 flex items-center text-gray-800 mt-3">
+        <div class="attribute-name text-xs" style="flex: 1">Owner</div>
+        <div
+          class="attribute-value cursor-pointer flex items-center text-sm font-medium"
+          style="flex: 3"
+        >
+          <div
+            class="pfp w-6 h-6 bg-red-500 flex items-center justify-center mr-3 mt-1 rounded-md"
+          >
+            <p style="font-size: 10px" class="text-white">MM</p>
+          </div>
+          <div class="text-gray-700">Michael Machado</div>
+        </div>
+      </div>
+
+      <div class="attribute ml-5 flex items-center text-gray-800 mt-3">
+        <div class="attribute-name text-xs" style="flex: 1">Severity</div>
+        <div
+          class="attribute-value cursor-pointer flex items-center text-sm font-medium"
+          style="flex: 3"
+        >
+          <div class="text-gray-700">Medium</div>
+        </div>
+      </div>
+
+      <div class="attribute ml-5 flex items-center text-gray-800 mt-3">
+        <div class="attribute-name text-xs" style="flex: 1">Tags</div>
+        <div
+          class="attribute-value cursor-pointer text-sm font-medium"
+          style="flex: 3"
+        >
+          <div
+            class="flex items-center bg-gray-300 px-2 py-1 rounded-full"
+            style="width: fit-content"
+          >
+            <div class="pfp bg-blue-500 flex mr-1 rounded-full p-1"></div>
+            <div class="text-xs text-black">Sprint 14</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="attribute ml-5 flex items-center text-gray-800 mt-3">
+        <div class="attribute-name text-xs" style="flex: 1">Rev Org</div>
+        <div
+          class="attribute-value cursor-pointer text-sm font-medium"
+          style="flex: 3"
+        >
+          <div
+            class="flex items-center bg-gray-300 px-2 py-1 rounded-full"
+            style="width: fit-content"
+          >
+            <div class="pfp bg-yellow-500 flex mr-1 rounded-full p-2"></div>
+            <div class="text-xs text-black">Manan's Demo DevOrg</div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="ml-5 mt-5 text-sm text-gray-600 mb-5 cursor-pointer"
+        style="font-size: 10px"
+      >
+        <i class="fa-solid fa-plus"></i> Add Attributes
+      </div>
+
+      <hr />
+
+      <div class="conv-box__tickets my-5 mx-5">
+        <div class="conv-box__tickets-head flex justify-between items-center">
+          <p class="text-xs font-medium bg-gray-300 py-1 px-2 rounded-full">
+            Issues
+          </p>
+          <p class="text-gray-500 text-xs cursor-pointer">
+            <i class="fa-solid fa-plus"></i> Link Issues
+          </p>
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="w-full">
+        <div
+          class="mt-5 text-sm bg-gray-100 px-2 py-1 float-right rounded-md shadow-md cursor-pointer mr-5"
+          style="width: fit-content; border: 1px solid #ccc"
+        >
+          Create
+        </div>
+      </div>
+    </div>
+    <!-- CONVERSATION BOX MODAL ------------- -->
   </body>
 </html>
