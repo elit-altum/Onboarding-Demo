@@ -1,9 +1,13 @@
 console.log("Plug is in");
 
+import { tour } from "./tour.js";
+tour.start();
+
 const steps = [
   {
     type: "suggested",
     text: "Hey, the API is not working",
+    tooltipText: "Your customers can type their queries here."
   },
   {
     type: "received",
@@ -13,20 +17,12 @@ const steps = [
   {
     type: "suggested",
     text: "I am getting 503 errors on GET requests but POST requests work fine.",
+    tooltipText: "Interact with them directly for maximum engagement."
   },
   {
     type: "received",
     sentBy: "Michael Machado",
     text: "Thanks for the information and reporting the issue! We would resolve it by today midnight!",
-  },
-  {
-    type: "suggested",
-    text: "Great! Thanks for the quick response, how can I track the progress?",
-  },
-  {
-    type: "received",
-    sentBy: "Michael Machado",
-    text: "I can share the ticket with you! Please hold for sometime",
   },
   {
     type: "end",
@@ -106,43 +102,67 @@ const typeWriter = (elem, text, index, speed, resolve) => {
 // }, Promise.resolve());
 
 const startRun = () => {
-    steps.reduce(async (p, step) => {
-        await p;
-        if (step.type === "suggested") {
-          return new Promise((resolve) => {
-            console.log(step);
-            setTimeout(async () => {
-              const box = document.getElementById("editor-input-text");
-              const submitBtn = document.getElementById("editor-input-submit");
-              submitBtn.disabled = true;
-      
-              const textCompletePromise = new Promise((resolve) => {
-                typeWriter(box, step.text, 0, 30, resolve);
-              });
-      
-              await textCompletePromise;
-      
-              submitBtn.disabled = false;
-              submitBtn.addEventListener(
-                "click",
-                (e) => {
-                  box.innerText = "";
-                  chat.innerHTML += getNewSentHtml(step.text);
-                  resolve();
-                },
-                { once: true }
-              );
-            }, 1500);
+  steps.reduce(async (p, step, index) => {
+    await p;
+    if (step.type === "suggested") {
+      return new Promise((resolve) => {
+        tour.addStep({
+          text: step.tooltipText,
+          classes: "flex items-center justify-center text-center",
+          attachTo: {
+            element: "#plug-input",
+            on: "right",
+          },
+        });
+        tour.next();
+
+        setTimeout(async () => {
+          const box = document.getElementById("editor-input-text");
+          const submitBtn = document.getElementById("editor-input-submit");
+          submitBtn.disabled = true;
+
+          const textCompletePromise = new Promise((resolve) => {
+            typeWriter(box, step.text, 0, 30, resolve);
           });
-        } else if (step.type === "received") {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              chat.innerHTML += getNewReceivedHTML(step.text, step.sentBy);
+
+          await textCompletePromise;
+
+          submitBtn.disabled = false;
+          submitBtn.addEventListener(
+            "click",
+            (e) => {
+              box.innerText = "";
+              chat.innerHTML += getNewSentHtml(step.text);
               resolve();
-            }, 2000);
-          });
-        }
-      }, Promise.resolve());
-}
+            },
+            { once: true }
+          );
+        }, 1500);
+      });
+    } else if (step.type === "received") {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          chat.innerHTML += getNewReceivedHTML(step.text, step.sentBy);
+          if (index === steps.length - 2) {
+            tour.addStep({
+              text: `Let's move to DevRev to see how it looks to Michael`,
+              classes: "flex items-center justify-center text-center",
+              buttons: [
+                {
+                  action() {
+                    return window.location.href = '/devrev';
+                  },
+                  text: "Next",
+                },
+              ],
+            });
+            tour.next();
+          }
+          resolve();
+        }, 2000);
+      });
+    }
+  }, Promise.resolve());
+};
 
-
+export { startRun };
