@@ -5,20 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DevRev</title>
 
+    <link rel="stylesheet" href="../css/font-awesome/css/fontawesome.min.css" />
+    <link rel="stylesheet" href="../css/font-awesome/css/solid.min.css" />
+    <link rel="stylesheet" href="../css/font-awesome/css/regular.min.css" />
     <link
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="../css/font-awesome/css/fontawesome.min.css" />
-    <link rel="stylesheet" href="../css/font-awesome/css/solid.min.css" />
-    <link rel="stylesheet" href="../css/font-awesome/css/regular.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/css/shepherd.css"
+    />
 
     <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="nav.css" />
     <link rel="stylesheet" href="page.css" />
     <link rel="stylesheet" href="conversation.css" />
     <link rel="stylesheet" href="../css/custom.css" />
+
+    <script src="../js/modernizr.js"></script>
+    <script src="../js/pace.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@10.0.1/dist/js/shepherd.min.js"></script>
   </head>
   <body>
     <!-- SIDE NAV SECTION ------------ -->
@@ -52,7 +59,7 @@
           <p>Support</p>
         </div>
         <div class="section-links">
-          <p>Inbox</p>
+          <p id="inbox">Inbox</p>
           <p>Tickets</p>
           <p>Team Activity</p>
           <p>Active Ticket Tracker</p>
@@ -133,7 +140,7 @@
           <div class="tags">| Tags</div>
           <div class="last_updated">| Last Updated</div>
         </div>
-        <div class="conv-table__row">
+        <div class="conv-table__row" id="first-conv">
           <div class="members">Customer Name</div>
           <div class="rev_org">Google</div>
           <div class="last_message">
@@ -155,7 +162,7 @@
     <!-- MAIN PAGE CONTENT END -------------- -->
 
     <!-- CONVERSATION BOX MODAL ------------- -->
-    <div class="conversation-box flex flex-col">
+    <div class="conversation-box flex flex-col" id="conv-box">
       <div class="conv-box__header m-5 text-xs p-1 px-2 rounded-lg font-medium">
         <p><i class="fa-regular fa-comments"></i> CONV-1</p>
       </div>
@@ -196,15 +203,41 @@
           <p class="text-xs font-medium bg-gray-300 py-1 px-2 rounded-full">
             Tickets
           </p>
-          <p class="text-gray-500 text-xs cursor-pointer">
+          <p class="text-gray-500 text-xs cursor-pointer" id="link-tickets-btn">
             <i class="fa-solid fa-plus"></i> Link Tickets
           </p>
         </div>
         <div
-          class="mt-5 conv-box__tickets-box h-20 rounded-lg flex items-center justify-center"
-          style="border: 1px solid #ccc"
+          class="mt-5 conv-box__tickets-box h-20 rounded-lg"
         >
-          <p class="text-gray-500 text-xs">No Linked Tickets</p>
+          <p class="text-gray-500 text-xs text-center" id="no_tkt_text">No Linked Tickets</p>
+          <div class="px-2 py-2 h-20 shadow-xl rounded-lg" id="ticket_show">
+            <div class="link-tkt-head w-full mt-1">
+              <div class="flex w-full items-center">
+                <div
+                  class="ticket-box__header text-xs font-medium px-2 py-1 rounded-md"
+                >
+                  <i class="fa-solid fa-users-rays"></i> TKT - 4
+                </div>
+                <p class="ml-2 text-sm">POST API calls failing on Prod</p>
+              </div>
+            </div>
+            <div class="flex text-sm text-gray-800 items-center mt-2">
+              <div class="bg-gray-300 px-2 rounded-xl text-xs"><i class="fa-solid fa-link"></i> Related</div>
+              <div class="ml-2 text-sm">
+                <i
+                  class="fa-solid fa-clock-rotate-left"
+                ></i>
+                New
+              </div>
+              <div class="ml-2">Medium</div>
+              <div
+                class="pfp w-6 h-6 bg-red-500 flex items-center justify-center ml-2 rounded-md"
+              >
+                <p style="font-size: 10px" class="text-white">MM</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -229,7 +262,7 @@
 
       <div class="plug_box-textBox absolute bottom-0 z-40 pb-3 w-full">
         <hr />
-        <div class="plug_box-editor">
+        <div class="plug_box-editor" id="chat-text-editor">
           <div class="editor-input" id="editor-input-text"></div>
           <div class="editor-row">
             <div class="edit-row__icons">
@@ -253,19 +286,25 @@
     <!-- CONVERSATION BOX MODAL ------------- -->
 
     <!-- CONVERSATION BOX MODAL ------------- -->
-    <div class="ticket-box flex flex-col">
+    <div class="ticket-box flex flex-col" id="ticket-box">
       <div
         class="ticket-box__header m-5 text-xs p-1 px-2 rounded-lg font-medium"
       >
         <p><i class="fa-regular fa-pen-to-square"></i> New Ticket</p>
       </div>
 
-      <div class="ml-5 pb-4 text-sm text-gray-600 cursor-pointer">
+      <div
+        class="ml-5 pb-4 text-sm text-gray-600 cursor-pointer"
+        id="tkt-title"
+      >
         Add Title
       </div>
       <hr />
 
-      <div class="ml-5 mt-5 pb-4 text-sm text-gray-600 cursor-pointer">
+      <div
+        class="ml-5 mt-5 pb-4 text-sm text-gray-600 cursor-pointer"
+        id="tkt-description"
+      >
         Add Description
       </div>
       <div class="ml-5 text-sm pb-4 text-gray-700 cursor-pointer">
@@ -282,7 +321,11 @@
 
       <hr />
 
-      <div class="ml-5 mt-5 text-sm text-gray-600" style="font-size: 10px">
+      <div
+        class="ml-5 mt-5 text-sm text-gray-600"
+        style="font-size: 10px"
+        id="tkt-attributes"
+      >
         Attributes
       </div>
       <div class="attribute ml-5 flex items-center text-gray-800 mt-3">
@@ -368,11 +411,14 @@
         <div
           class="mt-5 text-sm bg-gray-100 px-2 py-1 float-right rounded-md shadow-md cursor-pointer mr-5"
           style="width: fit-content; border: 1px solid #ccc"
+          id="submit-ticket-btn"
         >
           Create
         </div>
       </div>
     </div>
     <!-- CONVERSATION BOX MODAL ------------- -->
+    <script src="js/listeners.js"></script>
+    <script type="module" src="js/index.js"></script>
   </body>
 </html>

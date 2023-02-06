@@ -7,6 +7,7 @@
   height: 100%;
   border: 1px solid #ddd;
   box-shadow: -10px 0px 10px 1px #aaaaaa;
+  display: none;
 }
 
 .ticket-box {
@@ -18,6 +19,11 @@
   height: 100%;
   border: 1px solid #ddd;
   box-shadow: -5px 10px 10px 1px #eee;
+  display: none;
+}
+
+#ticket_show{
+  display: none;
 }
 
 .conv-box__header {
