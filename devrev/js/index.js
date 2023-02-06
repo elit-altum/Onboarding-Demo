@@ -14,6 +14,12 @@ const steps = [
     on: "top",
   },
   {
+    type: "point",
+    id: "chat-comments",
+    text: "View the customer interaction for full context here. Or send a message.",
+    on: "left",
+  },
+  {
     type: "click",
     tooltipText: "Click here to link a ticket",
     id: "link-tickets-btn",
@@ -28,12 +34,13 @@ const steps = [
   {
     type: "fill",
     id: "tkt-title",
-    text: "POST API calls failing on Prod",
+    text: "GET API calls for payments failing",
+    runNext: true,
   },
   {
     type: "fill",
     id: "tkt-description",
-    text: "Multiple customer reports of failing call",
+    text: "Multiple customer reports of GET requests failing with error code 503 on the payments API in production. Customer reports say POST requests seems to work fine.",
   },
   {
     type: "point",
@@ -57,7 +64,7 @@ const steps = [
     id: "ticket_show",
     text: "The attached ticket is now linked to the conversation for all future references",
     on: "left",
-  }
+  },
 ];
 
 tour.start();
@@ -95,7 +102,7 @@ steps.reduce(async (p, step, index) => {
           }
           resolve();
           if (index === steps.length - 1) {
-            console.log('complete');
+            console.log("complete");
             tour.complete();
           }
         },
@@ -103,6 +110,9 @@ steps.reduce(async (p, step, index) => {
       );
     });
   } else if (step.type === "fill") {
+    if (step?.runNext) {
+      tour.next();
+    }
     return new Promise((resolve) => {
       const elem = document.getElementById(step.id);
       elem.innerHTML = "";

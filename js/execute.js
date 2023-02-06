@@ -6,23 +6,23 @@ tour.start();
 const steps = [
   {
     type: "suggested",
-    text: "Hey, the API is not working",
+    text: "Hey, the payments API is failing",
     tooltipText: "Your customers can type their queries here."
   },
   {
     type: "received",
     sentBy: "Michael Machado",
-    text: "sure give me more context",
+    text: "Thanks for reporting! Could you please tell me a bit more about it?",
   },
   {
     type: "suggested",
-    text: "I am getting 503 errors on GET requests but POST requests work fine.",
+    text: "We are getting 503 errors on GET requests but POST requests seem to work fine.",
     tooltipText: "Interact with them directly for maximum engagement."
   },
   {
     type: "received",
     sentBy: "Michael Machado",
-    text: "Thanks for the information and reporting the issue! We would resolve it by today midnight!",
+    text: "Thanks for the information! Let me get back to you in the evening with the progress and the fixes made.",
   },
   {
     type: "end",

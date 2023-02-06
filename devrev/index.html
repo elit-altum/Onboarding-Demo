@@ -32,7 +32,11 @@
 
     <div class="side-nav">
       <div class="profile">
-        <div class="profile-picture"></div>
+        <div
+          class="pfp w-6 h-6 bg-red-500 flex items-center justify-center mr-2 rounded-md"
+        >
+          <p style="font-size: 10px" class="text-white">MM</p>
+        </div>
         <i class="fa-solid fa-gear"></i>
       </div>
 
@@ -141,10 +145,10 @@
           <div class="last_updated">| Last Updated</div>
         </div>
         <div class="conv-table__row" id="first-conv">
-          <div class="members">Customer Name</div>
-          <div class="rev_org">Google</div>
+          <div class="members">your.customer</div>
+          <div class="rev_org">Maple Systems</div>
           <div class="last_message">
-            I can share the ticket with you! Please hold for sometime
+            Thanks for the information! Let me get back to you in the evening with the progress and the fixes made.
           </div>
           <div class="stage">
             <i
@@ -177,7 +181,7 @@
         <div
           class="conv-box__meta-revOrg bg-gray-300 p-1 px-2 rounded-full ml-2 cursor-pointer"
         >
-          Manan Demo DevOrg
+          Maple Systems
         </div>
       </div>
 
@@ -207,27 +211,27 @@
             <i class="fa-solid fa-plus"></i> Link Tickets
           </p>
         </div>
-        <div
-          class="mt-5 conv-box__tickets-box h-20 rounded-lg"
-        >
-          <p class="text-gray-500 text-xs text-center" id="no_tkt_text">No Linked Tickets</p>
+        <div class="mt-5 conv-box__tickets-box h-20 rounded-lg">
+          <p class="text-gray-500 text-xs text-center" id="no_tkt_text">
+            No Linked Tickets
+          </p>
           <div class="px-2 py-2 h-20 shadow-xl rounded-lg" id="ticket_show">
             <div class="link-tkt-head w-full mt-1">
               <div class="flex w-full items-center">
                 <div
                   class="ticket-box__header text-xs font-medium px-2 py-1 rounded-md"
                 >
-                  <i class="fa-solid fa-users-rays"></i> TKT - 4
+                  <i class="fa-solid fa-users-rays"></i> TKT-4
                 </div>
-                <p class="ml-2 text-sm">POST API calls failing on Prod</p>
+                <p class="ml-2 text-sm" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">GET API calls for payments failing</p>
               </div>
             </div>
             <div class="flex text-sm text-gray-800 items-center mt-2">
-              <div class="bg-gray-300 px-2 rounded-xl text-xs"><i class="fa-solid fa-link"></i> Related</div>
+              <div class="bg-gray-300 px-2 rounded-xl text-xs">
+                <i class="fa-solid fa-link"></i> Related
+              </div>
               <div class="ml-2 text-sm">
-                <i
-                  class="fa-solid fa-clock-rotate-left"
-                ></i>
+                <i class="fa-solid fa-clock-rotate-left"></i>
                 New
               </div>
               <div class="ml-2">Medium</div>
@@ -243,7 +247,7 @@
 
       <hr />
 
-      <div class="conv-box__comments mt-3 overflow-y-scroll invisible-scroll">
+      <div class="conv-box__comments mt-3 overflow-y-scroll invisible-scroll" id="chat-comments">
         <div class="conv-box__comment mx-3 mt-3 flex">
           <div
             class="pfp w-8 h-8 bg-gray-500 flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"
@@ -253,9 +257,63 @@
           <div class="conv-box__comments-data w-full">
             <div class="conv-box__comments-head flex justify-between">
               <p class="text-sm font-medium">your.customer</p>
-              <p class="text-gray-500" style="font-size: 10px">6:21 PM</p>
+              <p class="text-gray-500" style="font-size: 10px">2m ago</p>
             </div>
-            <p class="text-sm">Hey! Just Testing</p>
+            <p class="text-sm">Hey, the payments API is failing.</p>
+          </div>
+        </div>
+
+        <div class="conv-box__comment mx-3 mt-3 flex">
+          <div
+            class="pfp w-8 h-8 bg-red-500 text-white flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"
+          >
+            MM
+          </div>
+          <div class="conv-box__comments-data w-full">
+            <div class="conv-box__comments-head flex justify-between">
+              <p class="text-sm font-medium">Michael Machado</p>
+              <p class="text-gray-500" style="font-size: 10px">2m ago</p>
+            </div>
+            <p class="text-sm">
+              Thanks for reporting! Could you please tell me a bit more about
+              it?
+            </p>
+          </div>
+        </div>
+
+        <div class="conv-box__comment mx-3 mt-3 flex">
+          <div
+            class="pfp w-8 h-8 bg-gray-500 flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"
+          >
+            YY
+          </div>
+          <div class="conv-box__comments-data w-full">
+            <div class="conv-box__comments-head flex justify-between">
+              <p class="text-sm font-medium">your.customer</p>
+              <p class="text-gray-500" style="font-size: 10px">1m ago</p>
+            </div>
+            <p class="text-sm">
+              We are getting 503 errors on GET requests but POST requests seem
+              to work fine.
+            </p>
+          </div>
+        </div>
+
+        <div class="conv-box__comment mx-3 mt-3 flex">
+          <div
+            class="pfp w-8 h-8 bg-red-500 text-white flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"
+          >
+            MM
+          </div>
+          <div class="conv-box__comments-data w-full">
+            <div class="conv-box__comments-head flex justify-between">
+              <p class="text-sm font-medium">Michael Machado</p>
+              <p class="text-gray-500" style="font-size: 10px">1m ago</p>
+            </div>
+            <p class="text-sm">
+              Thanks for the information! Let me get back to you in the evening
+              with the progress and the fixes made.
+            </p>
           </div>
         </div>
       </div>
@@ -349,7 +407,7 @@
           class="attribute-value cursor-pointer flex items-center text-sm font-medium"
           style="flex: 3"
         >
-          <div class="text-gray-700">Medium</div>
+          <div class="text-gray-700">High</div>
         </div>
       </div>
 
@@ -380,7 +438,7 @@
             style="width: fit-content"
           >
             <div class="pfp bg-yellow-500 flex mr-1 rounded-full p-2"></div>
-            <div class="text-xs text-black">Manan's Demo DevOrg</div>
+            <div class="text-xs text-black">Maple Systems</div>
           </div>
         </div>
       </div>
