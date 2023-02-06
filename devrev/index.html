@@ -145,10 +145,18 @@
           <div class="last_updated">| Last Updated</div>
         </div>
         <div class="conv-table__row" id="first-conv">
-          <div class="members">your.customer</div>
+          <div class="members flex items-center">
+            <div
+              class="pfp w-5 h-5 bg-gray-500 flex items-center justify-center mr-2 rounded-md"
+            >
+              <p style="font-size: 10px" class="text-white">YY</p>
+            </div>
+            your.customer
+          </div>
           <div class="rev_org">Maple Systems</div>
-          <div class="last_message">
-            Thanks for the information! Let me get back to you in the evening with the progress and the fixes made.
+          <div class="last_message flex items-center">
+            Thanks for the information! Let me get back to you in the evening
+            with the progress and the fixes made.
           </div>
           <div class="stage">
             <i
@@ -223,7 +231,16 @@
                 >
                   <i class="fa-solid fa-users-rays"></i> TKT-4
                 </div>
-                <p class="ml-2 text-sm" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">GET API calls for payments failing</p>
+                <p
+                  class="ml-2 text-sm"
+                  style="
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                  "
+                >
+                  GET API calls for payments failing
+                </p>
               </div>
             </div>
             <div class="flex text-sm text-gray-800 items-center mt-2">
@@ -247,7 +264,10 @@
 
       <hr />
 
-      <div class="conv-box__comments mt-3 overflow-y-scroll invisible-scroll" id="chat-comments">
+      <div
+        class="conv-box__comments mt-3 overflow-y-scroll invisible-scroll"
+        id="chat-comments"
+      >
         <div class="conv-box__comment mx-3 mt-3 flex">
           <div
             class="pfp w-8 h-8 bg-gray-500 flex items-center justify-center mr-3 .self-start mt-1 rounded-md px-3"

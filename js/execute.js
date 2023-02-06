@@ -150,7 +150,7 @@ const startRun = () => {
               buttons: [
                 {
                   action() {
-                    return window.location.href += 'devrev/index.html';
+                    return window.location.href = 'devrev/index.html';
                   },
                   text: "Next",
                 },
