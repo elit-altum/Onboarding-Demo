@@ -62,7 +62,7 @@ const steps = [
   {
     type: "point",
     id: "ticket_show",
-    text: "The attached ticket is now linked to the conversation for all future references",
+    text: "The attached ticket is now linked to the conversation for all future references!",
     on: "left",
   },
 ];
@@ -87,7 +87,6 @@ steps.reduce(async (p, step, index) => {
     return new Promise((resolve) => {
       tour.addStep({
         text: step.tooltipText,
-        classes: "flex items-center justify-center text-center",
         attachTo: {
           element: "#" + step.id,
           on: step.on,
@@ -119,7 +118,6 @@ steps.reduce(async (p, step, index) => {
       typeWriter(elem, step.text, 0, 30, resolve);
     });
   } else if (step.type === "point") {
-    console.log(step);
     tour.addStep({
       text: step.text,
       classes: "flex items-center justify-center text-center",
@@ -132,7 +130,7 @@ steps.reduce(async (p, step, index) => {
           action() {
             return this.next();
           },
-          text: "Next",
+          text: (index === steps.length - 1) ? "DONE" : "NEXT",
         },
       ],
     });

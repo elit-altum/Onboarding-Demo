@@ -7,22 +7,25 @@ const steps = [
   {
     type: "suggested",
     text: "Hey, the payments API is failing",
-    tooltipText: "Your customers can type their queries here."
+    tooltipText: "Your customers can type their queries here.",
   },
   {
     type: "received",
     sentBy: "Michael Machado",
     text: "Thanks for reporting! Could you please tell me a bit more about it?",
+    tooltipText: "Interact directly for maximum engagement.",
+    id: "mm-chat",
   },
   {
     type: "suggested",
     text: "We are getting 503 errors on GET requests but POST requests seem to work fine.",
-    tooltipText: "Interact with them directly for maximum engagement."
+    tooltipText: "Get more context and first hand case reporting.",
   },
   {
     type: "received",
     sentBy: "Michael Machado",
     text: "Thanks for the information! Let me get back to you in the evening with the progress and the fixes made.",
+    id: "mm-chat-2",
   },
   {
     type: "end",
@@ -44,8 +47,8 @@ const getNewSuggestedHTML = (text, id) => {
   </div>`;
 };
 
-const getNewReceivedHTML = (text, sentBy) => {
-  return `<div class="plug_box-chat-received">
+const getNewReceivedHTML = (text, sentBy, id) => {
+  return `<div class="plug_box-chat-received" id="${id}">
   <div class="profile-details">
   </div>
   <div class="text-details">
@@ -106,15 +109,16 @@ const startRun = () => {
     await p;
     if (step.type === "suggested") {
       return new Promise((resolve) => {
-        tour.addStep({
-          text: step.tooltipText,
-          classes: "flex items-center justify-center text-center",
-          attachTo: {
-            element: "#plug-input",
-            on: "right",
-          },
-        });
-        tour.next();
+        if (step.tooltipText) {
+          tour.addStep({
+            text: step.tooltipText,
+            attachTo: {
+              element: "#editor-input-submit",
+              on: "right",
+            },
+          });
+          tour.next();
+        }
 
         setTimeout(async () => {
           const box = document.getElementById("editor-input-text");
@@ -142,7 +146,19 @@ const startRun = () => {
     } else if (step.type === "received") {
       return new Promise((resolve) => {
         setTimeout(() => {
-          chat.innerHTML += getNewReceivedHTML(step.text, step.sentBy);
+          chat.innerHTML += getNewReceivedHTML(step.text, step.sentBy, step.id);
+          if (step.tooltipText) {
+            tour.addStep({
+              text: step.tooltipText,
+              attachTo: {
+                element: "#" + step.id,
+                on: "right",
+              },
+            });
+            setTimeout(() => {
+              tour.next();
+            }, 3800)
+          }
           if (index === steps.length - 2) {
             tour.addStep({
               text: `Let's move to DevRev to see how it looks to Michael`,
@@ -150,7 +166,7 @@ const startRun = () => {
               buttons: [
                 {
                   action() {
-                    return window.location.href += 'devrev/index.html';
+                    return (window.location.href += "devrev/index.html");
                   },
                   text: "Next",
                 },
@@ -159,7 +175,7 @@ const startRun = () => {
             tour.next();
           }
           resolve();
-        }, 2000);
+        }, 1500);
       });
     }
   }, Promise.resolve());

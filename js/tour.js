@@ -6,25 +6,23 @@ const tour = new Shepherd.Tour({
 
 tour.addStep({
   text: `Welcome to the DevRev Demo, let's get started!`,
-  id: "creating",
   classes: "flex items-center justify-center text-center",
   buttons: [
     {
       action() {
         return this.next();
       },
-      text: "Next",
+      text: "NEXT",
     },
   ],
-  id: "creating",
 });
 
 tour.addStep({
   text: "Click here to open the PLuG widget where your customers can converse with your front desk",
   attachTo: {
-    element: '#start-plug-btn',
-    on: 'top'
-  }
+    element: "#start-plug-btn",
+    on: "top",
+  },
 });
 
-export {tour};
+export { tour };

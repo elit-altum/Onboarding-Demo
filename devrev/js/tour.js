@@ -12,7 +12,7 @@ tour.addStep({
       action() {
         return this.next();
       },
-      text: "Next",
+      text: "NEXT",
     },
   ],
 });
